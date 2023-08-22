@@ -41,7 +41,8 @@ app.get('/api/verdun-rezo/gare', async (req, res) => {
              const writer = fs.createWriteStream(path.resolve(GTFS_RT_PATH));
              response.data.pipe(writer);
              writer.on('finish', async () => {
-                 console.log('File downloaded successfully!');
+                 let currentTime = new Date();
+                 console.log('File downloaded at '+ currentTime.getHours()+":"+ (currentTime.getMinutes() < 10 ? '0' : currentTime.getMinutes()));
 
                  const rt_hours = await getRtHours();
                  const theoretical_hours = await getTheoreticalHours();
@@ -199,15 +200,12 @@ async function getTheoreticalHours(){
     let arrivals = [];
 
     arrivals = await getNextArrivalAtStop();
-    //console.log(arrivals);
-    //return arrivals.Hours
 
     let Hours = arrivals.Data.Hours;
     let arrival_limited = await filterLimited(Hours);
     let THEORETICAL_HOURS = [];
 
     await arrival_limited.forEach((element) => {
-        //Determiner le temps restant
         let now = new Date();
         let current_time = (now.getHours()*60)+now.getMinutes();
         let RemainMinutes = element.TheoricArrivalTime - current_time;
@@ -258,7 +256,6 @@ async function getTheoreticalHours(){
 
     async function filterLimited(hours){
         let filtered = [];
-        //console.log(hours)
         let  end_hour_in_minutes = () => {
             let now = new Date();
             let hours = now.getHours();
@@ -266,10 +263,8 @@ async function getTheoreticalHours(){
 
             return hours*60 + minutes + 46;
         }
-        console.log(end_hour_in_minutes())
         hours.forEach((element) => {
             if(element.TheoricArrivalTime <= end_hour_in_minutes() && element.TheoricArrivalTime != null && element.TheoricArrivalTime >= (end_hour_in_minutes()-44) ){
-                //console.log(element);
                 filtered.push(element);
             }
         })
