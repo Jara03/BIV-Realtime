@@ -1,25 +1,27 @@
 <template>
   <div class="main-container">
 
-    <div style="display: flex;flex-direction: row; justify-content:space-evenly;align-content: center;">
+    <!-- En-tête de la page -->
+    <div style="display: flex; flex-direction: row; justify-content: space-evenly; align-content: center;">
 
-      <div style="display: flex; justify-content: start; align-items: center; margin-left:50px">
+      <!-- Logo -->
+      <div style="display: flex; justify-content: start; align-items: center; margin-left: 50px">
         <img src="../../resources/LOGO-REZO-2048x1065.png" alt="" style="width: 100px; height: 50px"/>
       </div>
 
-        <div style="display: flex; justify-content: center; align-items: center; flex-grow: 1; ">
-          <h2 style="color: black">Gare Multimodale</h2>
-        </div>
+      <!-- Titre de la page -->
+      <div style="display: flex; justify-content: center; align-items: center; flex-grow: 1;">
+        <h2 style="color: black">Gare Multimodale</h2>
+      </div>
 
-      <div style="display: flex; justify-content: center; align-items: center;background-color:#8f6adf;">
-        <p style="color:white;padding: 50px; font-size:20px">{{ currentTime }}</p>
+      <!-- Heure actuelle -->
+      <div style="display: flex; justify-content: center; align-items: center; background-color: #8f6adf;">
+        <p style="color: white; padding: 50px; font-size: 20px">{{ currentTime }}</p>
       </div>
 
     </div>
 
-
-    <!--diapo part-->
-
+    <!-- Partie diapositive -->
     <div class="slideshow-container table-container">
       <div v-for="(page, index) in pages" :key="index" class="slide" :class="{ active: currentPageIndex === index }">
         <table class="my-table">
@@ -32,7 +34,7 @@
           </thead>
           <tbody>
           <tr v-for="(hours, index) in page" :key="index">
-            <td><label class="lineTag" :style="{backgroundColor:hours.color}">{{hours.ln}}</label></td>
+            <td><label class="lineTag" :style="{ backgroundColor: hours.color }">{{ hours.ln }}</label></td>
             <td><label>{{ hours.direction }}</label></td>
             <td>{{ formatTimeLeft(hours.rm) }}<img v-if="hours.rt" class="realtime-icon" src="../../resources/rt-animated.gif" alt="realtime GIF"/></td>
           </tr>
@@ -40,28 +42,27 @@
         </table>
       </div>
     </div>
-    <!--diapo part-->
+    <!-- Fin de la partie diapositive -->
 
   </div>
 
+  <!-- Contenu de la page -->
   <div>
-    <!-- Your page content here -->
     <div class="footer">
-      <!-- Your footer content here -->
+      <!-- Contenu du pied de page -->
       <img src="../../resources/logo-grand-verdun.png" style="height: 10%; width: 10%" alt="">
       <img src="../../resources/Transdev_logo_2018.png" style="height: 10%; width: 10%" alt="">
-      <p> version beta (1.0)</p>
+      <p>version beta (1.0)</p>
     </div>
   </div>
-
 </template>
 
 <script>
-
 import axios from 'axios';
 
 export default {
   created() {
+    // Mettre à jour l'heure actuelle chaque seconde
     setInterval(() => {
       let date = new Date();
       this.currentTime = date.toLocaleTimeString();
@@ -69,35 +70,33 @@ export default {
   },
 
   mounted() {
+    // Appel à l'API toutes les 10 secondes pour mettre à jour les heures
     setInterval(() => {
-      //faire l'appel api et intégrer les données
       axios.get("http://localhost:3000/api/verdun-rezo/gare")
           .then((response) => {
-
             let data = response.data;
-            this.hours = (data);
-            //Vue.set(this.hours,'hours',data);
+            this.hours = data;
           })
           .catch((error) => {
             console.error(error);
           });
-
     }, 10000);
+
+    // Changement de diapositive toutes les 7 secondes
     setInterval(() => {
       this.currentPageIndex = (this.currentPageIndex + 1) % this.pages.length;
     }, 7000);
-
   },
-  name: 'HelloWorld',
+
+  name: 'BivInterface',
   props: {
     msg: String
   },
-  data(){
+  data() {
     return {
       itemsPerPage: 4,
       currentPageIndex: 0,
-
-      hours: [{tr:	"921280008:11",ln:"L1", rm:"1",direction:"...",color:"black"}],
+      hours: [{ tr: "921280008:11", ln: "L1", rm: "1", direction: "...", color: "black" }],
       currentTime: ''
     }
   },
@@ -113,23 +112,22 @@ export default {
       return pages;
     }
   },
-  methods:{
-
-    formatTimeLeft(time){
-      return time < 1 ? 'Passage Imminent' :  time + " min ";
+  methods: {
+    formatTimeLeft(time) {
+      return time < 1 ? 'Passage imminent' : time + " min ";
     }
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+/* Styles CSS spécifiques au composant */
 .slideshow-container {
   position: relative;
   height: 500px;
   overflow: hidden;
 }
+
 .slide {
   position: absolute;
   top: 0;
@@ -137,9 +135,10 @@ export default {
   width: 100%;
   height: 100%;
   opacity: 0;
-  transition:opacity 0.25s ease-in-out;
+  transition: opacity 0.25s ease-in-out;
   z-index: -1;
 }
+
 .slide.active {
   opacity: 1;
   z-index: 1;
@@ -158,26 +157,27 @@ export default {
   padding: 10px;
 }
 
-.lineTag{
-  font-weight:bold;
+.lineTag {
+  font-weight: bold;
   font-size: 30px;
   border-radius: 7px;
   border: 2px inherit solid;
   padding-inline: 10px;
   padding-bottom: 3px;
   padding-top: 3px;
-  color:white;
+  color: white;
   justify-content: start;
   width: auto;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
 
-.main-container{
-
+.main-container {
+  /* Styles pour le conteneur principal */
 }
-.realtime-icon{
-  width: 25px ;
+
+.realtime-icon {
+  width: 25px;
   height: 20px;
   transform: rotate(45deg);
 }
@@ -188,12 +188,14 @@ export default {
   justify-content: center;
 }
 
+/* Styles pour la table */
 .my-table {
   width: 100%;
   border-collapse: collapse;
 }
 
-.my-table th, .my-table td {
+.my-table th,
+.my-table td {
   padding: 25px;
   text-align: center;
   background-color: lightgrey;
@@ -211,18 +213,16 @@ export default {
 .my-table td:nth-child(3) {
   width: 33%;
 }
+
 .my-table th {
   background-color: #f2f2f2;
-
 }
+
+/* Autres styles pour la table */
 .my-table td {
 }
+
 .my-table tr {
   border-bottom: 3px solid #fff;
 }
-
-
-
-
-
 </style>
