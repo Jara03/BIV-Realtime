@@ -34,7 +34,7 @@
           <tr v-for="(hours, index) in page" :key="index">
             <td><label class="lineTag" :style="{backgroundColor:hours.color}">{{hours.ln}}</label></td>
             <td><label>{{ hours.direction }}</label></td>
-            <td>{{ formatRemainingTime(hours.rm) }}<img v-if="hours.rt" class="realtime-icon" src="../../resources/giphy.gif" alt="realtime GIF"/></td>
+            <td>{{ formatTimeLeft(hours.rm) }}<img v-if="hours.rt" class="realtime-icon" src="../../resources/rt-animated.gif" alt="realtime GIF"/></td>
           </tr>
           </tbody>
         </table>
@@ -71,7 +71,7 @@ export default {
   mounted() {
     setInterval(() => {
       //faire l'appel api et intégrer les données
-      axios.get("https://localhost:443/api/verdun-rezo/gare")
+      axios.get("http://localhost:3000/api/verdun-rezo/gare")
           .then((response) => {
 
             let data = response.data;
@@ -97,10 +97,7 @@ export default {
       itemsPerPage: 4,
       currentPageIndex: 0,
 
-      hours: [{tr:	"921280008:11",ln:"L1", rm:"14",direction:"...",color:"black"},
-        {tr:	"906450009:7",ln:"L2", rm:"1",direction:"...",color:"black"},
-        {tr:	"927200008:11",ln:"L3", rm:"5",direction:"...",color:"black"},
-        {tr:  "934800012:7",ln:"L7", rm:"23",direction:"...",color:"black"}],
+      hours: [{tr:	"921280008:11",ln:"L1", rm:"1",direction:"...",color:"black"}],
       currentTime: ''
     }
   },
@@ -118,7 +115,7 @@ export default {
   },
   methods:{
 
-    formatRemainingTime(time){
+    formatTimeLeft(time){
       return time < 1 ? 'Passage Imminent' :  time + " min ";
     }
   }

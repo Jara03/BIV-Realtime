@@ -1,14 +1,14 @@
 <template>
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <BivInterface/>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import BivInterface from './components/biv-interface.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    BivInterface: BivInterface
   }
 }
 </script>
