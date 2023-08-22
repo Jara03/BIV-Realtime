@@ -13,20 +13,10 @@ const app = express();
 app.use(cors());
 
 
-const privateKey = fs.readFileSync("./key.pem",'utf8');
-const certificate = fs.readFileSync('./cert.pem','utf8');
-const credentials  = {key:privateKey, cert: certificate};
-
-const agent = new https.Agent({
-        requestCert: true,
-        rejectUnauthorized: false,
-        cert:certificate
-});
 app.get('/api/verdun-rezo/gare', async (req, res) => {
     const GTFS_RT_PATH =  './resources/poll.proto';
     try {
          axios.get('https://zenbus.net/gtfs/rt/poll.proto?dataset=verdun-rezo',{
-            httpsAgent: agent,
             responseType:'stream'
         }).then(async response => {
              if(fs.existsSync(GTFS_RT_PATH)){
@@ -70,10 +60,9 @@ app.get('/api/verdun-rezo/gare', async (req, res) => {
 
 });
 
-const httpsServer = https.createServer(credentials,app);
-const PORT = 443;
+const PORT = 3000;
 
-httpsServer.listen(PORT, () => {
+app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}.`);
 });
 
