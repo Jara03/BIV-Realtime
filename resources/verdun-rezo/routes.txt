@@ -1,0 +1,7 @@
+route_id,agency_id,route_short_name,route_long_name,route_desc,route_type,route_url,route_color,route_text_color,route_sort_order,continuous_pickup,continuous_drop_off
+zenbus:Line:481980001:LOC,,L1,Aristide Briand - Europe,L1,3,,8770D8,FFFFFF,0,,
+zenbus:Line:507050001:LOC,,L2,Saint Exupéry - Barrès / Désandrouins,L2,3,,CFDF77,FFFFFF,0,,
+zenbus:Line:501420001:LOC,,L3,Wameau - Pré l'Evêque,L3,3,,68D0BF,FFFFFF,0,,
+zenbus:Line:486040001:LOC,,L5,Gare Multimodale - Belleray EPL Agro / Haudainville Ecole Primaire,L5,3,,AD659A,FFFFFF,0,,
+zenbus:Line:495440001:LOC,,L6,Saint Barthélémy - St Exupéry / Gare Multimodale,L6,3,,FFFC56,FFFFFF,0,,
+zenbus:Line:511120001:LOC,,L7,Baleycourt - Gare Multimodale,L7,3,,69E5FB,FFFFFF,0,,
