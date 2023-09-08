@@ -63,7 +63,7 @@ module.exports = async function (context, req) {
             
     
     context.res.json({
-        text: "Hello from the verdun-rezo"
+        data: "Hello from the verdun-rezo"
     });
 
         }).catch(error => {
