@@ -75,7 +75,7 @@ export default {
       axios.get("/api/verdun-rezo/gare")
           .then((response) => {
             let data = response.data;
-            console.log(data)
+            console.log(response)
             this.hours = data;
           })
           .catch((error) => {
