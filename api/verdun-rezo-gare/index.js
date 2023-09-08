@@ -17,55 +17,26 @@ module.exports = async function (context, req) {
             responseType: 'stream'
         }).then(async response => {
             // Si le fichier GTFS-RT existe déjà, le supprime
-            
-           if (fs.existsSync(GTFS_RT_PATH)) {
-                fs.unlink(GTFS_RT_PATH, (err) => {
-                    if (err) {
-                        console.error(err);
-                    }
-                });
-                }
-            
 
-            // Crée un flux d'écriture pour enregistrer le fichier GTFS-RT téléchargé
-            const writer = fs.createWriteStream(path.resolve(GTFS_RT_PATH));
-            response.data.pipe(writer);
+            let currentTime = new Date();
+            console.log('File downloaded at ' + currentTime.getHours() + ":" + (currentTime.getMinutes() < 10 ? '0' : currentTime.getMinutes()));
 
-            // Événement déclenché lorsque l'écriture est terminée
-            
-            writer.on('finish', async () => {
-                let currentTime = new Date();
-                console.log('File downloaded at ' + currentTime.getHours() + ":" + (currentTime.getMinutes() < 10 ? '0' : currentTime.getMinutes()));
+            // Obtient les heures en temps réel (RT) et les heures théoriques
+            //const rt_hours = await getRtHours(response);
+            const theoretical_hours = await getTheoreticalHours();
 
-                // Obtient les heures en temps réel (RT) et les heures théoriques
-                const rt_hours = await getRtHours();
-                const theoretical_hours = await getTheoreticalHours();
+            // Filtre les heures pour ne garder que celles pertinentes
+            //const filteredHours = filterHours(rt_hours, theoretical_hours);
 
-                // Filtre les heures pour ne garder que celles pertinentes
-                const filteredHours = filterHours(rt_hours, theoretical_hours);
 
-                // Supprime le fichier GTFS-RT téléchargé après utilisation
-                fs.unlink(GTFS_RT_PATH, (err) => {
-                    if (err) {
-                        console.error(err);
-                    }
-                });
-
-                // Renvoie les heures filtrées au client
-                //res.json(filteredHours);
-    
-                context.res.json({
-                    data: "Hello from the verdun-rezo"
-                });
+            // Renvoie les heures filtrées au client
+            //res.json(filteredHours);
+            context.res.json({
+                data: "Hello from the verdun-rezo"
             });
             
+            })
 
-            
-
-        }).catch(error => {
-            console.error('Error downloading file:', error);
-        });
-    
 
     } catch (error) {
         console.error(error);
@@ -341,11 +312,11 @@ async function getNextArrivalAtStop() {
  * Obtient les heures de passage en temps réel (RT) des véhicules.
  * @returns {Array} - Tableau d'objets contenant les heures de passage en temps réel.
  */
-async function getRtHours() {
+async function getRtHours(data) {
     let RTHOURS = [];
 
     // Lecture des données du fichier poll.proto
-    const data = fs.readFileSync("./resources/poll.proto");
+   // const data = fs.readFileSync("./resources/poll.proto");
 
     // Décodage des données du fichier en un objet FeedMessage
     const feed = GtfsRealtimeBindings.transit_realtime.FeedMessage.decode(Buffer.from(data));
