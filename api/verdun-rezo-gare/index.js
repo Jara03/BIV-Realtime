@@ -12,18 +12,22 @@ module.exports = async function (context, req) {
 
     try {
         // Effectue une requête pour obtenir le fichier GTFS-RT depuis Zenbus
-        /*
+        
         axios.get('https://zenbus.net/gtfs/rt/poll.proto?dataset=verdun-rezo', {
             responseType: 'stream'
         }).then(async response => {
             // Si le fichier GTFS-RT existe déjà, le supprime
-            if (fs.existsSync(GTFS_RT_PATH)) {
+            /*
+           if (fs.existsSync(GTFS_RT_PATH)) {
                 fs.unlink(GTFS_RT_PATH, (err) => {
                     if (err) {
                         console.error(err);
                     }
                 });
-            }*/
+                */
+                
+               console.log(response)
+            });
             
 
             // Crée un flux d'écriture pour enregistrer le fichier GTFS-RT téléchargé
@@ -64,8 +68,8 @@ module.exports = async function (context, req) {
 
         /*}).catch(error => {
             console.error('Error downloading file:', error);
-        });
-        */
+        });*/
+    
 
     } catch (error) {
         console.error(error);
