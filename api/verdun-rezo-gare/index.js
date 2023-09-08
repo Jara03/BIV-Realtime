@@ -11,6 +11,11 @@ const csv = require("csv-parser");
 
     const GTFS_RT_PATH = './resources/poll.proto';
 
+    
+    context.res.json({
+        text: "Hello from the verdun-rezo"
+    });
+
     try {
         // Effectue une requête pour obtenir le fichier GTFS-RT depuis Zenbus
         axios.get('https://zenbus.net/gtfs/rt/poll.proto?dataset=verdun-rezo', {
@@ -51,9 +56,6 @@ const csv = require("csv-parser");
                 // Renvoie les heures filtrées au client
                 //res.json(filteredHours);
 
-                context.res.json({
-                    text: "Hello from the verdun-rezo"
-                });
             });
 
         }).catch(error => {
