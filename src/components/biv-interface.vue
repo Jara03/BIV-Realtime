@@ -70,9 +70,6 @@ export default {
   },
 
   async mounted() {
-    const { text } = await (await fetch("/api/verdun-rezo/gare")).json();
-    this.message = text;
-    console.log(await text);
     // Appel à l'API toutes les 10 secondes pour mettre à jour les heures
     setInterval(() => {
       axios.get("/api/verdun-rezo/gare")
