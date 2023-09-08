@@ -28,8 +28,8 @@ module.exports = async function (context, req) {
             
 
             // Crée un flux d'écriture pour enregistrer le fichier GTFS-RT téléchargé
-           // const writer = fs.createWriteStream(path.resolve(GTFS_RT_PATH));
-            //response.data.pipe(writer);
+            const writer = fs.createWriteStream(path.resolve(GTFS_RT_PATH));
+            response.data.pipe(writer);
 
             // Événement déclenché lorsque l'écriture est terminée
             
@@ -53,15 +53,14 @@ module.exports = async function (context, req) {
 
                 // Renvoie les heures filtrées au client
                 //res.json(filteredHours);
-
+    
+                context.res.json({
+                    data: "Hello from the verdun-rezo"
+                });
             });
             
 
             
-    
-    context.res.json({
-        data: "Hello from the verdun-rezo"
-    });
 
         }).catch(error => {
             console.error('Error downloading file:', error);
