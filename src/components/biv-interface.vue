@@ -75,7 +75,7 @@ export default {
     console.log(await text);
     // Appel à l'API toutes les 10 secondes pour mettre à jour les heures
     setInterval(() => {
-      axios.get("http://localhost:3000/api/verdun-rezo/gare")
+      axios.get("/api/verdun-rezo/gare")
           .then((response) => {
             let data = response.data;
             this.hours = data;
