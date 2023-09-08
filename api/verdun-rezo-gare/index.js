@@ -1,5 +1,3 @@
-module.exports = async function (context, req) {
-
 const GtfsRealtimeBindings = require('gtfs-realtime-bindings');
 const fs = require("fs");
 const readline = require("readline");
@@ -7,6 +5,9 @@ const Long = require("long");
 const axios = require("axios") ;
 const path = require("path");
 const csv = require("csv-parser");
+
+module.exports = async function (context, req) {
+
 
 
     const GTFS_RT_PATH = './resources/poll.proto';
