@@ -17,17 +17,14 @@ module.exports = async function (context, req) {
             responseType: 'stream'
         }).then(async response => {
             // Si le fichier GTFS-RT existe déjà, le supprime
-            /*
+            
            if (fs.existsSync(GTFS_RT_PATH)) {
                 fs.unlink(GTFS_RT_PATH, (err) => {
                     if (err) {
                         console.error(err);
                     }
                 });
-                */
-                
-               console.log(response)
-            });
+                }
             
 
             // Crée un flux d'écriture pour enregistrer le fichier GTFS-RT téléchargé
@@ -35,7 +32,7 @@ module.exports = async function (context, req) {
             //response.data.pipe(writer);
 
             // Événement déclenché lorsque l'écriture est terminée
-            /*
+            
             writer.on('finish', async () => {
                 let currentTime = new Date();
                 console.log('File downloaded at ' + currentTime.getHours() + ":" + (currentTime.getMinutes() < 10 ? '0' : currentTime.getMinutes()));
@@ -58,7 +55,7 @@ module.exports = async function (context, req) {
                 //res.json(filteredHours);
 
             });
-            */
+            
 
             
     
@@ -66,9 +63,9 @@ module.exports = async function (context, req) {
         data: "Hello from the verdun-rezo"
     });
 
-        /*}).catch(error => {
+        }).catch(error => {
             console.error('Error downloading file:', error);
-        });*/
+        });
     
 
     } catch (error) {
