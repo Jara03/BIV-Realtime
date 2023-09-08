@@ -9,32 +9,28 @@ const csv = require("csv-parser");
 module.exports = async function (context, req) {
 
     try {
-        // Effectue une requête pour obtenir le fichier GTFS-RT depuis Zenbus
-        
+           // Define the URL you want to make a GET request to
+           const apiUrl = 'https://stage1.api.grandest2.cityway.fr/api/transport/v3/timetable/GetNextStopHoursForStops/json';
 
-            //let currentTime = new Date();
-            //console.log('File downloaded at ' + currentTime.getHours() + ":" + (currentTime.getMinutes() < 10 ? '0' : currentTime.getMinutes()));
-
-            // Obtient les heures en temps réel (RT) et les heures théoriques
-            //const rt_hours = await getRtHours(response);
-            const theoretical_hours = await getTheoreticalHours();
-
-            // Filtre les heures pour ne garder que celles pertinentes
-            //const filteredHours = filterHours(rt_hours, theoretical_hours);
-
-
-            // Renvoie les heures filtrées au client
-            //res.json(filteredHours);
-         
-            context.res.json({
-                data: theoretical_hours
-            });
-            
-
-
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'An error occurred' });
+           // Make a GET request using Axios
+           const response = await axios.get(apiUrl);
+   
+           // Extract the data from the response
+           const responseData = response.data;
+   
+           // Return a JSON response with the data
+           context.res = {
+               status: 200,
+               body: responseData,
+           };
+       } catch (error) {
+           // Handle any errors that occur during the request
+           context.res = {
+               status: error.response ? error.response.status : 500,
+               body: {
+                   error: error.message,
+               },
+           };
     }
 
 /**
