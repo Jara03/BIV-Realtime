@@ -11,13 +11,10 @@ const csv = require("csv-parser");
 
     const GTFS_RT_PATH = './resources/poll.proto';
 
-    
-    context.res.json({
-        text: "Hello from the verdun-rezo"
-    });
 
     try {
         // Effectue une requête pour obtenir le fichier GTFS-RT depuis Zenbus
+        
         axios.get('https://zenbus.net/gtfs/rt/poll.proto?dataset=verdun-rezo', {
             responseType: 'stream'
         }).then(async response => {
@@ -29,12 +26,14 @@ const csv = require("csv-parser");
                     }
                 });
             }
+            
 
             // Crée un flux d'écriture pour enregistrer le fichier GTFS-RT téléchargé
-            const writer = fs.createWriteStream(path.resolve(GTFS_RT_PATH));
-            response.data.pipe(writer);
+           // const writer = fs.createWriteStream(path.resolve(GTFS_RT_PATH));
+            //response.data.pipe(writer);
 
             // Événement déclenché lorsque l'écriture est terminée
+            /*
             writer.on('finish', async () => {
                 let currentTime = new Date();
                 console.log('File downloaded at ' + currentTime.getHours() + ":" + (currentTime.getMinutes() < 10 ? '0' : currentTime.getMinutes()));
@@ -57,10 +56,18 @@ const csv = require("csv-parser");
                 //res.json(filteredHours);
 
             });
+            */
+
+            
+    
+    context.res.json({
+        text: "Hello from the verdun-rezo"
+    });
 
         }).catch(error => {
             console.error('Error downloading file:', error);
         });
+        
 
     } catch (error) {
         console.error(error);
