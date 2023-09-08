@@ -97,8 +97,13 @@ export default {
       itemsPerPage: 4,
       currentPageIndex: 0,
       hours: [{ tr: "921280008:11", ln: "L1", rm: "1", direction: "...", color: "black" }],
-      currentTime: ''
+      currentTime: '',
+      message: ""
     }
+  },async mounted() {
+    const { text } = await (await fetch("/api/message")).json();
+    this.message = text;
+    console.log(await text);
   },
   computed: {
     pages() {
