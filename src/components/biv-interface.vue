@@ -75,7 +75,7 @@ export default {
 
     const { data } = await (await fetch("/api/verdun-rezo/gare")).json();
     this.data = data;
-    console.log(await data);
+    console.log(await this.data);
     setInterval(() => {
       axios.get("/api/verdun-rezo/gare")
           .then(async (response) => {

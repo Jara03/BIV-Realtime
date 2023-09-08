@@ -7,16 +7,12 @@ const path = require("path");
 const csv = require("csv-parser");
 
 module.exports = async function (context, req) {
-
-
-
-
     const GTFS_RT_PATH = './resources/poll.proto';
 
 
     try {
         // Effectue une requête pour obtenir le fichier GTFS-RT depuis Zenbus
-        
+        /*
         axios.get('https://zenbus.net/gtfs/rt/poll.proto?dataset=verdun-rezo', {
             responseType: 'stream'
         }).then(async response => {
@@ -27,7 +23,7 @@ module.exports = async function (context, req) {
                         console.error(err);
                     }
                 });
-            }
+            }*/
             
 
             // Crée un flux d'écriture pour enregistrer le fichier GTFS-RT téléchargé
@@ -66,10 +62,10 @@ module.exports = async function (context, req) {
         data: "Hello from the verdun-rezo"
     });
 
-        }).catch(error => {
+        /*}).catch(error => {
             console.error('Error downloading file:', error);
         });
-        
+        */
 
     } catch (error) {
         console.error(error);
