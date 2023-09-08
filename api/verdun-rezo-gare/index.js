@@ -49,7 +49,11 @@ const csv = require("csv-parser");
                 });
 
                 // Renvoie les heures filtrées au client
-                res.json(filteredHours);
+                //res.json(filteredHours);
+
+                context.res.json({
+                    text: "Hello from the verdun-rezo"
+                });
             });
 
         }).catch(error => {
