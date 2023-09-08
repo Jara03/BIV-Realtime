@@ -7,22 +7,17 @@ const path = require("path");
 const csv = require("csv-parser");
 
 module.exports = async function (context, req) {
-    const GTFS_RT_PATH = './resources/poll.proto';
-
 
     try {
         // Effectue une requête pour obtenir le fichier GTFS-RT depuis Zenbus
         
-        axios.get('https://zenbus.net/gtfs/rt/poll.proto?dataset=verdun-rezo', {
-            responseType: 'stream'
-        }).then(response => {
 
             //let currentTime = new Date();
             //console.log('File downloaded at ' + currentTime.getHours() + ":" + (currentTime.getMinutes() < 10 ? '0' : currentTime.getMinutes()));
 
             // Obtient les heures en temps réel (RT) et les heures théoriques
             //const rt_hours = await getRtHours(response);
-            //const theoretical_hours = await getTheoreticalHours();
+            const theoretical_hours = await getTheoreticalHours();
 
             // Filtre les heures pour ne garder que celles pertinentes
             //const filteredHours = filterHours(rt_hours, theoretical_hours);
@@ -30,12 +25,11 @@ module.exports = async function (context, req) {
 
             // Renvoie les heures filtrées au client
             //res.json(filteredHours);
-            let z = "zoozozei"
+         
             context.res.json({
-                data: "Hello from the verdun-rezo"+z
+                data: theoretical_hours
             });
             
-            })
 
 
     } catch (error) {
