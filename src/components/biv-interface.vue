@@ -70,19 +70,21 @@ export default {
   },
 
   async mounted() {
-    
-    // Appel à l'API toutes les 10 secondes pour mettre à jour les heures
-    setInterval(() => {
-      axios.get("https://biv-api.azurewebsites.net/api/verdun-rezo/gare")
-          .then(async (response) => {
-            let data = response.data;
-            this.hours = data;
+    // Function to fetch data from the API
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("https://biv-api.azurewebsites.net/api/verdun-rezo/gare");
+        this.hours = response.data;
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
-          })
-          .catch((error) => {
-            console.error(error);
-          });
-    }, 10000);
+    // Initial fetch
+    await fetchData();
+
+    // Set interval to fetch data every 10 seconds
+    setInterval(fetchData, 10000);
 
     // Changement de diapositive toutes les 7 secondes
     setInterval(() => {
