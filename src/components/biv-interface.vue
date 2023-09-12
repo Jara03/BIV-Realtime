@@ -65,7 +65,7 @@ export default {
     // Mettre à jour l'heure actuelle chaque seconde
     setInterval(() => {
       let date = new Date();
-      this.currentTime = date.toLocaleTimeString();
+      this.currentTime = date.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit',second:'2-digit' });
     }, 1000)
   },
 
@@ -98,7 +98,7 @@ export default {
   },
   data() {
     return {
-      itemsPerPage: 4,
+      itemsPerPage: 7,
       currentPageIndex: 0,
       hours: [{ tr: "921280008:11", ln: "L1", rm: "1", direction: "...", color: "black" }],
       currentTime: '',
@@ -170,6 +170,8 @@ export default {
   padding-inline: 10px;
   padding-bottom: 3px;
   padding-top: 3px;
+  padding-left: 5px;
+  padding-right: 5px;
   color: white;
   justify-content: start;
   width: auto;
