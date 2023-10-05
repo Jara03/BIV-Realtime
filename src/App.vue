@@ -1,15 +1,18 @@
 <template>
      <div id="app">
-    <router-view></router-view> <!-- This will render the component based on the route -->
+    <router-view><BivInterface></BivInterface></router-view> <!-- This will render the component based on the route -->
   </div>
 </template>
 
 <script>
+import BivInterface from './components/biv-interface.vue';
+
 
 export default {
   name: 'App',
   components: {
-  }
+    BivInterface
+}
 }
 </script>
 
