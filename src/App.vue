@@ -1,6 +1,6 @@
 <template>
      <div id="app">
-    <router-view></router-view> <!-- This will render the component based on the route -->
+    <RouterView/> <!-- This will render the component based on the route -->
   </div>
 </template>
 
