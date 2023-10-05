@@ -13,7 +13,8 @@ const home = {
   template: "<div>Home</div>",
 }
 const routes = [
-    { path: '/biv/:stop', component: biv, props: true }
+  { path: '/', component: biv, props: true },
+  { path: '/biv/:stop', component: biv, props: true }
   ]
   
   const router = createRouter({
