@@ -5,11 +5,14 @@
 </template>
 
 <script>
+import BivInterface from './components/biv-interface.vue';
+
 
 
 export default {
   name: 'App',
   components: {
+    BivInterface
 }
 }
 </script>
