@@ -70,10 +70,12 @@ export default {
   },
 
   async mounted() {
+    const id = this.id;
+
     // Function to fetch data from the API
     const fetchData = async () => {
       try {
-        const response = await axios.get("https://biv-api.azurewebsites.net/api/verdun-rezo/gare");
+        const response = await axios.get("https://biv-api.azurewebsites.net/api/verdun-rezo/${id}");
         this.hours = response.data;
       } catch (error) {
         console.error(error);
@@ -94,7 +96,8 @@ export default {
 
   name: 'BivInterface',
   props: {
-    msg: String
+    msg: String,
+    id: String
   },
   data() {
     return {

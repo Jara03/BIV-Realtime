@@ -1,5 +1,7 @@
 <template>
-  <BivInterface/>
+     <div id="app">
+    <router-view></router-view> <!-- This will render the component based on the route -->
+  </div>
 </template>
 
 <script>
