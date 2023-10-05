@@ -72,9 +72,10 @@ export default {
   async mounted() {
 
     // Function to fetch data from the API
+    console.log(this.id)
     const fetchData = async () => {
       try {
-        const response = await axios.get("https://biv-api.azurewebsites.net/api/verdun-rezo/${this.id}");
+        const response = await axios.get("https://biv-api.azurewebsites.net/api/verdun-rezo/"+this.id);
         this.hours = response.data;
       } catch (error) {
         console.error(error);
