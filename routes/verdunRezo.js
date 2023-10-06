@@ -42,14 +42,24 @@ router.get('/gare', async function(req, res, next) {
     router.get('/:stop/name', async function(req,res,next) { 
         
         try {
-    
-            let response = await axios.get('https://stage1.api.grandest2.cityway.fr:443/api/transport/v3/stop/GetStopsDetails/json', {
-                params: {
-                    StopIds: stop = "citura" ? "1802131" : stop = "gare" ? "151317" : ""
-                }
-            });
+      // Get the 'stop' parameter from the URL
+      const stop = req.params.stop;
 
-            res.json({Name:response.data.Data[0].Name})
+      // Define a mapping of stop names to StopIds
+      const stopId = stop === 'citura' ? '1802131' : stop === 'gare' ? '151317' : '151317';
+      const color = stop === 'citura' ? "#751e27" : stop === 'gare' ? "#8f6adf" : "#8f6adf"
+  
+      // Make the Axios GET request with the correct StopIds
+      const response = await axios.get('https://stage1.api.grandest2.cityway.fr:443/api/transport/v3/stop/GetStopsDetails/json', {
+        params: {
+          StopIds: stopId // Use the mapped StopId
+        }
+      });
+  
+      // Extract the name from the response data and send it as JSON
+      const name = response.data.Data[0].Name;
+      res.json({ Name: name ,
+    color :color });
       
         } catch (error) {
             console.error(error);
