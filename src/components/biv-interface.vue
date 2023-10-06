@@ -15,7 +15,7 @@
       </div>
 
       <!-- Heure actuelle -->
-      <div style="display: flex; justify-content: center; align-items: center; background-color: #8f6adf;">
+      <div style="display: flex; justify-content: center; align-items: center; background-color: {{stopName.color}};">
         <p style="color: white; padding: 50px; font-size: 20px">{{ currentTime }}</p>
       </div>
 
@@ -81,7 +81,6 @@ export default {
         const stop_response = await axios.get("https://biv-api2.azurewebsites.net/api/verdun-rezo/"+this.$route.params.stop+"/name");
         this.stopName = stop_response.data;
         console.log(stop_response.data)
-        console.log(this.$route.params.stop)
       } catch (error) {
         console.error(error);
       }
@@ -111,7 +110,7 @@ export default {
       hours: [{ tr: "921280008:11", ln: "L1", rm: "1", direction: "...", color: "black" }],
       currentTime: '',
       message: "",
-      stopName:""
+      stopName:"",
     }
   },
   computed: {
