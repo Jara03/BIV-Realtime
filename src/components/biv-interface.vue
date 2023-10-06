@@ -11,7 +11,7 @@
 
       <!-- Titre de la page -->
       <div style="display: flex; justify-content: center; align-items: center; flex-grow: 1;">
-        <h2 style="color: black">{{ stopName }}</h2>
+        <h2 style="color: black">{{ stopName.Name }}</h2>
       </div>
 
       <!-- Heure actuelle -->
@@ -80,6 +80,7 @@ export default {
 
         const stop_response = await axios.get("https://biv-api.azurewebsites.net/api/verdun-rezo/"+this.$route.params.stop+"/name");
         this.stopName = stop_response.data;
+        console.log(stop_response.data)
       } catch (error) {
         console.error(error);
       }
