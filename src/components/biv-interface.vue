@@ -75,10 +75,10 @@ export default {
   console.log(this.$route.params.stop)
     const fetchData = async () => {
       try {
-        const response = await axios.get("https://biv-api.azurewebsites.net/api/verdun-rezo/"+this.$route.params.stop);
+        const response = await axios.get("https://biv-api2.azurewebsites.net/api/verdun-rezo/"+this.$route.params.stop);
         this.hours = response.data;
 
-        const stop_response = await axios.get("https://biv-api.azurewebsites.net/api/verdun-rezo/"+this.$route.params.stop+"/name");
+        const stop_response = await axios.get("https://biv-api2.azurewebsites.net/api/verdun-rezo/"+this.$route.params.stop+"/name");
         this.stopName = stop_response.data;
         console.log(stop_response.data)
       } catch (error) {
