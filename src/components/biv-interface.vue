@@ -6,12 +6,12 @@
 
       <!-- Logo -->
       <div style="display: flex; justify-content: start; align-items: center; margin-left: 50px">
-        <img src="../../resources/LOGO-REZO-2048x1065.png" alt="" style="width: 100px; height: 50px"/>
+        <img :src="operatorImage()" alt="" style="width: 100px; height: 50px"/>
       </div>
 
       <!-- Titre de la page -->
       <div style="display: flex; justify-content: center; align-items: center; flex-grow: 1;">
-        <h2 style="color: black">Gare Multimodale</h2>
+        <h2 style="color: black">{{ stopName }}</h2>
       </div>
 
       <!-- Heure actuelle -->
@@ -50,7 +50,7 @@
   <div>
     <div class="footer">
       <!-- Contenu du pied de page -->
-      <img src="../../resources/logo-grand-verdun.png" style="height: 10%; width: 10%" alt="">
+      <img :src="cityImage()" style="height: 10%; width: 10%" alt="">
       <img src="../../resources/Transdev_logo_2018.png" style="height: 10%; width: 10%" alt="">
       <p>version beta (1.0)</p>
     </div>
@@ -72,11 +72,14 @@ export default {
   async mounted() {
 
     // Function to fetch data from the API
-  console.log(this.param)
+  console.log(this.$route.params.stop)
     const fetchData = async () => {
       try {
         const response = await axios.get("https://biv-api.azurewebsites.net/api/verdun-rezo/"+this.$route.params.stop);
         this.hours = response.data;
+
+        const stop_response = await axios.get("https://biv-api.azurewebsites.net/api/verdun-rezo/"+this.$route.params.stop+"/name");
+        this.stopName = stop_response.data;
       } catch (error) {
         console.error(error);
       }
@@ -105,7 +108,8 @@ export default {
       currentPageIndex: 0,
       hours: [{ tr: "921280008:11", ln: "L1", rm: "1", direction: "...", color: "black" }],
       currentTime: '',
-      message: ""
+      message: "",
+      stopName:""
     }
   },
   computed: {
@@ -123,6 +127,26 @@ export default {
   methods: {
     formatTimeLeft(time) {
       return time < 1 ? 'Passage imminent' : time + " min ";
+    },
+    cityImage(){
+      if(this.$route.params.stop == "citura"){
+        return require("../../resources/logo-commune-citura.png")
+      }else if(this.$route.params.stop == "gare"){
+        return require("../../resources/logo-commune-verdun.png")
+
+      }
+
+    },
+    operatorImage(){
+      if(this.$route.params.stop == "citura"){
+        return require("../../resources/logo_reseau_citura.png")
+      }else if(this.$route.params.stop == "gare"){
+        return require("../../resources/logo_reseau_gare.png")
+
+      }
+    },
+    getStopName(){
+      return("Gare Multimodale")
     }
   }
 }

@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import BivInterface from '../components/BivInterface'
+import BivInterface from '../components/biv-interface'
 
 const routes = [
   {
-    path: '/',
+    path: '/biv/:stop',
     name: 'Biv',
     component: BivInterface
   },
