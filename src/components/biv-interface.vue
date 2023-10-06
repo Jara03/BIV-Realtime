@@ -81,6 +81,7 @@ export default {
         const stop_response = await axios.get("https://biv-api2.azurewebsites.net/api/verdun-rezo/"+this.$route.params.stop+"/name");
         this.stopName = stop_response.data;
         console.log(stop_response.data)
+        console.log(this.$route.params.stop)
       } catch (error) {
         console.error(error);
       }
