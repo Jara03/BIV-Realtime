@@ -15,7 +15,7 @@
       </div>
 
       <!-- Heure actuelle -->
-      <div style="display: flex; justify-content: center; align-items: center; background-color: {{stopName.color}};">
+      <div :style="{ display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: stopName.color }">
         <p style="color: white; padding: 50px; font-size: 20px">{{ currentTime }}</p>
       </div>
 
