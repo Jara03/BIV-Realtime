@@ -4,5 +4,7 @@
     "azureFunctions.projectLanguage": "JavaScript",
     "azureFunctions.projectRuntime": "~4",
     "debug.internalConsoleOptions": "neverOpen",
-    "azureFunctions.preDeployTask": "npm prune (functions)"
+    "azureFunctions.preDeployTask": "npm prune (functions)",
+    "appService.defaultWebAppToDeploy": "/subscriptions/b9acf28a-ab7f-4fe7-a4de-d32964816a5c/resourceGroups/BIV-Api/providers/Microsoft.Web/sites/biv-api",
+    "appService.deploySubpath": "BIV-Api"
 }
