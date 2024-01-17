@@ -59,7 +59,7 @@
 
 <script>
 import axios from 'axios';
-
+const apiurl = "https://qgb4wvql3yvhh7bg35ao6xel3u0jfsdg.lambda-url.eu-west-1.on.aws";
 export default {
   created() {
     // Mettre à jour l'heure actuelle chaque seconde
@@ -75,10 +75,10 @@ export default {
   console.log(this.$route.params.stop)
     const fetchData = async () => {
       try {
-        const response = await axios.get("https://biv-api2.azurewebsites.net/api/verdun-rezo/"+this.$route.params.stop);
+        const response = await axios.get(apiurl+"/api/verdun-rezo/"+this.$route.params.stop);
         this.hours = response.data;
 
-        const stop_response = await axios.get("https://biv-api2.azurewebsites.net/api/verdun-rezo/"+this.$route.params.stop+"/name");
+        const stop_response = await axios.get(apiurl+"/api/verdun-rezo/"+this.$route.params.stop+"/name");
         this.stopName = stop_response.data;
         console.log(stop_response.data)
       } catch (error) {
