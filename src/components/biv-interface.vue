@@ -51,7 +51,7 @@
     <div class="footer">
       <!-- Contenu du pied de page -->
       <img :src="cityImage()" style="height: 10%; width: 10%" alt="">
-      <img src="../../resources/Transdev_logo_2018.png" style="height: 10%; width: 10%" alt="">
+      <img src="../../resources/Transdev_logo.png" style="height: 10%; width: 10%" alt="">
       <p>version beta (1.0)</p>
     </div>
   </div>
